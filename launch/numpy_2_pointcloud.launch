@@ -1,0 +1,19 @@
+<launch>
+  <arg name="path"   default="/tmp" />
+  <arg name="pose"   default="ExportedPoses.txt" />
+  <arg name="suffix" default="_LIDAR" />
+  <arg name="ext"    default=".npy" />
+  <arg name="rate"   default="5" />
+  <arg name="color"  default="true" />
+  <arg name="color_max_dist" default="0" />
+
+  <node name="sim_pc_publisher" pkg="numpy_2_pointcloud" type="PointCloudPub.py" output="screen" required="true">
+    <param name="input_dir" value="$(arg path)" />
+    <param name="pose_file" value="$(arg pose)" />
+    <param name="suffix"    value="$(arg suffix)" />
+    <param name="ext"       value="$(arg ext)" />
+    <param name="rate"      value="$(arg rate)" />
+    <param name="color"     value="$(arg color)" />
+    <param name="color_max_dist" value="$(arg color_max_dist)" />
+  </node>
+</launch>
