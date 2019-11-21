@@ -161,7 +161,7 @@ def convert_numpy_2_pointcloud2_color(points, stamp=None, frame_id=None, maxDist
 
     C = C.view("uint32")
 
-    # Concatenate.
+    # Structured array.
     pointsColor = np.zeros( (points.shape[0], 1), \
         dtype={ 
             "names": ( "x", "y", "z", "rgba" ), 
