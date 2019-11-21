@@ -136,7 +136,7 @@ def convert_numpy_2_pointcloud2_color(points, stamp=None, frame_id=None, maxDist
     (https://answers.ros.org/question/289576/understanding-the-bytes-in-a-pcl2-message/)
     and expo_utility.xyz_array_to_point_cloud_msg() function of the AirSim package.
 
-    ROS sensor_msgs/PointField Message.
+    ROS sensor_msgs/PointField.
     http://docs.ros.org/melodic/api/sensor_msgs/html/msg/PointField.html
 
     More references on mixed-type NumPy array, structured array.
