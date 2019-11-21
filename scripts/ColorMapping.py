@@ -1,6 +1,8 @@
 
 from __future__ import print_function
 
+# Author: Yaoyu Hu <yaoyuh@andrew.cmu.edu>
+
 # Most of the content of this file is copied from
 # https://bsou.io/posts/color-gradients-with-python
 

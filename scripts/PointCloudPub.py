@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# Author: Yaoyu Hu <yaoyuh@andrew.cmu.edu>
+
 import glob
 import numpy as np
 import os
@@ -120,17 +122,27 @@ def convert_numpy_2_pointcloud2_color(points, stamp=None, frame_id=None, maxDist
     of points. 
 
     This function will automatically assign RGB values to each point. The RGB values are
-    determined by the distance of a point to the origin. Use maxDistColor to set the distance 
-    at which the color corresponds to the farthest is used.
+    determined by the distance of a point from the origin. Use maxDistColor to set the distance 
+    at which the color corresponds to the farthest distance is used.
 
     points: A NumPy array of Nx3.
-    stamp: An alternative stamp.
+    stamp: An alternative ROS header stamp.
     frame_id: The frame id. String.
     maxDisColor: Should be positive if specified..
 
-    This function is a combinateion of 
-    the code at https://github.com/spillai/pybot/blob/master/pybot/externals/ros/pointclouds.py
+    This function get inspired by 
+    https://github.com/spillai/pybot/blob/master/pybot/externals/ros/pointclouds.py
+    https://gist.github.com/lucasw/ea04dcd65bc944daea07612314d114bb
+    (https://answers.ros.org/question/289576/understanding-the-bytes-in-a-pcl2-message/)
     and expo_utility.xyz_array_to_point_cloud_msg() function of the AirSim package.
+
+    ROS sensor_msgs/PointField Message.
+    http://docs.ros.org/melodic/api/sensor_msgs/html/msg/PointField.html
+
+    More references on mixed-type NumPy array, structured array.
+    https://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html
+    https://stackoverflow.com/questions/37791134/merge-width-x-height-x-3-numpy-uint8-array-into-width-x-height-x-1-uint32-array
+    https://jakevdp.github.io/PythonDataScienceHandbook/02.09-structured-data-numpy.html
     '''
     
     # Clipping input.
