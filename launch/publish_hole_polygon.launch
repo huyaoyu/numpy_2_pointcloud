@@ -1,0 +1,20 @@
+<launch>
+  <arg name="incloud"          default="./MVSWithNormal_NoOverlap_ClusterFilter_MC.ply" />
+  <arg name="inpolygon"        default="./HolePolygonPoints.json" />
+  <arg name="rate"             default="20" />
+  <arg name="color_cam"        default="#228C22BF" />
+  <arg name="color_no_cam"     default="#FF7400BF" />
+  <arg name="color_max_dist"   default="0" />
+  <arg name="aligned_frame"    default="world_camera" />
+  <arg name="flag_normal_text" default="false" />
+
+  <node name="pc_hole_polygon_node" pkg="numpy_2_pointcloud" type="PointCloudPub_HolePolygon.py" output="screen" required="true">
+    <param name="incloud"           value="$(arg incloud)" />
+    <param name="inpolygon"         value="$(arg inpolygon)" />
+    <param name="rate"              value="$(arg rate)" />
+    <param name="color_cam"         value="$(arg color_cam)" />
+    <param name="color_no_cam"      value="$(arg color_no_cam)" />
+    <param name="aligned_frame"     value="$(arg aligned_frame)" />
+    <param name="flag_normal_text"  value="$(arg flag_normal_text)" />
+  </node>
+</launch>

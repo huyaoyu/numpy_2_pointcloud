@@ -1,0 +1,14 @@
+<launch>
+  <arg name="infile"         default="./pose.csv" />
+  <arg name="rate"           default="2" />
+  <arg name="color"          default="false" />
+  <arg name="color_max_dist" default="0" />
+  <arg name="aligned_frame"  default="world_camera" />
+
+  <node name="pc_occ_map_node" pkg="numpy_2_pointcloud" type="PCPub_OccupancyMap.py" output="screen" required="true">
+    <param name="infile"        value="$(arg infile)" />
+    <param name="rate"          value="$(arg rate)" />
+    <param name="color"         value="$(arg color)" />
+    <param name="aligned_frame" value="$(arg aligned_frame)" />
+  </node>
+</launch>
