@@ -1,0 +1,28 @@
+<launch>
+    <!-- For point cloud and cameras. -->
+    <arg name="case_dir"      default="/tmp" />
+    <arg name="aligned_frame" default="world_camera" />
+
+    <!-- For cameras. -->
+    <arg name="arrow_scale" default="0.4" />
+    <arg name="text_scale"  default="0.1" />
+    <arg name="traj_scale"  default="0.02" />
+
+    <node name="rviz_pc" 
+          type="rviz" 
+          pkg="rviz" 
+          args="-d $(find numpy_2_pointcloud)/rviz/exam_point_cloud.rviz" />
+
+    <include file="$(find numpy_2_pointcloud)/launch/single/publish_single_point_cloud.launch" >
+        <arg name="in_fn"         value="$(arg case_dir)/points.ply" />
+        <arg name="aligned_frame" value="$(arg aligned_frame)" />
+    </include>
+
+    <include file="$(find numpy_2_pointcloud)/launch/single/publish_single_camera_array.launch" >
+        <arg name="in_fn"         value="$(arg case_dir)/poses.csv" />
+        <arg name="aligned_frame" value="$(arg aligned_frame)" />
+        <arg name="arrow_scale"   value="$(arg arrow_scale)" />
+        <arg name="text_scale"    value="$(arg text_scale)" />
+        <arg name="traj_scale"   value="$(arg traj_scale)" />
+    </include>
+</launch>

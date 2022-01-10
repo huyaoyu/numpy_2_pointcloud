@@ -18,20 +18,11 @@ from visualization_msgs.msg import Marker, MarkerArray
 
 import CameraDescriptor as CD
 import CommonDefinition
+from CommonUtils import get_filename_parts
 
 NODE_NAME = "pc_camera_pose_node"
 TOPIC_NAME = "pc_camera_pose"
 ALIGNED_FRAME_ID = CommonDefinition.COMMON_ALIGNED_FRAME_ID
-
-def get_filename_parts(fn):
-    p = os.path.split(fn)
-
-    if ( "" == p[0] ):
-        p = (".", p[1])
-
-    f = os.path.splitext(p[1])
-
-    return [ p[0], f[0], f[1] ]
 
 def read_cameras_as_camera_descriptors(fn):
     parts = get_filename_parts(fn)

@@ -1,0 +1,17 @@
+<launch>
+  <arg name="in_fn"          default="/tmp/dummy.ply" />
+  <arg name="color"          default="false" />
+  <arg name="color_max_dist" default="0" />
+  <arg name="aligned_frame"  default="world_camera" />
+
+  <node name="pc_static_node" 
+        pkg="numpy_2_pointcloud" 
+        type="SinglePointCloudPub.py" 
+        output="screen" 
+        required="true">
+    <param name="in_fn"          value="$(arg in_fn)" />
+    <param name="color"          value="$(arg color)" />
+    <param name="color_max_dist" value="$(arg color_max_dist)" />
+    <param name="aligned_frame"  value="$(arg aligned_frame)" />
+  </node>
+</launch>

@@ -1,0 +1,19 @@
+<launch>
+  <arg name="in_fn"         default="./pose.csv" />
+  <arg name="aligned_frame" default="world_camera" />
+  <arg name="arrow_scale"   default="0.4" />
+  <arg name="text_scale"    default="0.1" />
+  <arg name="traj_scale"    default="0.02" />
+
+  <node name="pc_camera_pose_node" 
+        pkg="numpy_2_pointcloud" 
+        type="SingleCameraPoseArrayPub.py" 
+        output="screen" 
+        required="true">
+    <param name="in_fn"         value="$(arg in_fn)" />
+    <param name="aligned_frame" value="$(arg aligned_frame)" />
+    <param name="arrow_scale"   value="$(arg arrow_scale)" />
+    <param name="text_scale"    value="$(arg text_scale)" />
+    <param name="traj_scale"    value="$(arg traj_scale)" />
+  </node>
+</launch>

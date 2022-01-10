@@ -234,11 +234,13 @@ class PLYLoader(PCLoader):
         ply = PlyData.read(fn)
 
         # Check if we have the normal fields.
+        flag_have_normal = True
         try:
             ply["vertex"].ply_property("nx")
         except KeyError as ex:
             print("nx" == pattern.sub( "", str(ex)) )
-            raise Exception("No normal fields in the PLY file %s. " % (fn) )
+            print("No normal fields in the PLY file %s. " % (fn) )
+            flag_have_normal = False
 
         flagHaveCurvature = True
         try:
@@ -246,13 +248,18 @@ class PLYLoader(PCLoader):
         except KeyError as ex:
             flagHaveCurvature = False
 
-        if ( flagHaveCurvature ):
-            array = np.vstack( ( ply["vertex"]["x"], ply["vertex"]["y"], ply["vertex"]["z"], \
-                ply["vertex"]["nx"], ply["vertex"]["ny"], ply["vertex"]["nz"], \
-                ply["vertex"]["curvature"] ) ).astype(self.dtype)
+        if ( flag_have_normal ):
+            if ( flagHaveCurvature ):
+                array = np.vstack( ( ply["vertex"]["x"], ply["vertex"]["y"], ply["vertex"]["z"], \
+                    ply["vertex"]["nx"], ply["vertex"]["ny"], ply["vertex"]["nz"], \
+                    ply["vertex"]["curvature"] ) ).astype(self.dtype)
+            else:
+                array = np.vstack( ( ply["vertex"]["x"], ply["vertex"]["y"], ply["vertex"]["z"], \
+                    ply["vertex"]["nx"], ply["vertex"]["ny"], ply["vertex"]["nz"] ) 
+                        ).astype(self.dtype)
         else:
-            array = np.vstack( ( ply["vertex"]["x"], ply["vertex"]["y"], ply["vertex"]["z"], \
-                ply["vertex"]["nx"], ply["vertex"]["ny"], ply["vertex"]["nz"] ) 
+            array = np.vstack( 
+                ( ply["vertex"]["x"], ply["vertex"]["y"], ply["vertex"]["z"] ) 
                     ).astype(self.dtype)
 
         return array.transpose()
